@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-white text-gray-900 font-sans antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+@layer components {
+  .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+  }
+
+  .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.25);
+  }
+}
+
+/* TipTap editor styles */
+.ProseMirror {
+  outline: none;
+  min-height: 200px;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #9ca3af;
+  pointer-events: none;
+  height: 0;
+}
+
+.ProseMirror h1 { @apply text-3xl font-bold mb-3 mt-6; }
+.ProseMirror h2 { @apply text-2xl font-semibold mb-2 mt-5; }
+.ProseMirror h3 { @apply text-xl font-semibold mb-2 mt-4; }
+.ProseMirror p { @apply mb-3 leading-relaxed; }
+.ProseMirror ul { @apply list-disc pl-6 mb-3 space-y-1; }
+.ProseMirror ol { @apply list-decimal pl-6 mb-3 space-y-1; }
+.ProseMirror blockquote { @apply border-l-4 border-indigo-400 pl-4 italic text-gray-600 my-3; }
+.ProseMirror hr { @apply border-gray-200 my-6; }
+.ProseMirror code { @apply bg-gray-100 text-indigo-600 px-1.5 py-0.5 rounded text-sm font-mono; }
+.ProseMirror pre { @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4 font-mono text-sm; }
+.ProseMirror pre code { @apply bg-transparent text-inherit p-0; }
+.ProseMirror img { @apply max-w-full rounded-lg shadow-sm my-3; }
+.ProseMirror a { @apply text-indigo-600 underline underline-offset-2 hover:text-indigo-800; }
+.ProseMirror mark { @apply bg-yellow-200 px-0.5 rounded; }
+
+/* Task list */
+.ProseMirror ul[data-type="taskList"] { @apply list-none pl-0; }
+.ProseMirror ul[data-type="taskList"] li { @apply flex items-start gap-2 mb-1; }
+.ProseMirror ul[data-type="taskList"] li > label { @apply mt-1 flex-shrink-0; }
+.ProseMirror ul[data-type="taskList"] li > label input { @apply accent-indigo-600; }
+.ProseMirror ul[data-type="taskList"] li > div { @apply flex-1; }
+
+/* Table */
+.ProseMirror table { @apply border-collapse w-full mb-4; }
+.ProseMirror table td, .ProseMirror table th {
+  @apply border border-gray-200 px-3 py-2 text-left min-w-[80px];
+}
+.ProseMirror table th { @apply bg-gray-50 font-semibold; }
+.ProseMirror .selectedCell { @apply bg-indigo-50; }
+
+/* Slash command menu */
+.slash-menu {
+  @apply bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-1;
+  min-width: 240px;
+}
+
+.slash-menu-item {
+  @apply flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-50 transition-colors;
+}
+
+.slash-menu-item.is-selected {
+  @apply bg-indigo-50;
+}
+
+/* Card flip */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
